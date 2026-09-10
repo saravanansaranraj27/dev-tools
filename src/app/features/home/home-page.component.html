@@ -1,0 +1,174 @@
+<div class="home-page fade-in">
+  <section class="hero">
+    <div class="hero-icon">
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <polyline points="16 18 22 12 16 6" />
+        <polyline points="8 6 2 12 8 18" />
+        <line x1="12" y1="2" x2="12" y2="22" transform="rotate(-15 12 12)" />
+      </svg>
+    </div>
+    <h1 class="hero-title">DevTools</h1>
+    <p class="hero-subtitle">
+      Privacy-first developer utilities that run entirely in your browser.
+      <br />No servers. No tracking. No data leaves your device.
+    </p>
+    <div class="hero-badges">
+      <span class="badge">
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+          <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+        </svg>
+        100% Client-Side
+      </span>
+      <span class="badge">
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <polyline points="13 17 18 12 13 7" />
+          <polyline points="6 17 11 12 6 7" />
+        </svg>
+        Zero Dependencies
+      </span>
+      <span class="badge">
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <circle cx="12" cy="12" r="10" />
+          <polyline points="12 6 12 12 16 14" />
+        </svg>
+        Instant Results
+      </span>
+    </div>
+  </section>
+  <section class="tools-section">
+    <h2 class="section-title">Available Tools</h2>
+    <div class="tools-grid">
+      @for (tool of tools; track tool.path) {
+        <a [routerLink]="tool.path" class="tool-card">
+          <div class="tool-card-icon">
+            @if (tool.icon === "book") {
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
+                <path
+                  d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"
+                />
+                <line x1="8" y1="7" x2="16" y2="7" />
+                <line x1="8" y1="11" x2="14" y2="11" />
+              </svg>
+            } @else if (tool.icon === "code") {
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <polyline points="16 18 22 12 16 6" />
+                <polyline points="8 6 2 12 8 18" />
+              </svg>
+            } @else if (tool.icon === "lock") {
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+                <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+                <line x1="12" y1="15" x2="12" y2="17" />
+              </svg>
+            }
+          </div>
+          <div class="tool-card-content">
+            <h3 class="tool-card-title">{{ tool.title }}</h3>
+            <p class="tool-card-desc">{{ tool.desc }}</p>
+            @if (tool.topics) {
+              <div class="tool-card-stats">
+                <span>{{ tool.topics }} topics</span>
+                <span class="stat-dot"></span>
+                <span>{{ tool.commands }}+ commands</span>
+              </div>
+            }
+            @if (tool.features) {
+              <div class="tool-card-tags">
+                @for (feat of tool.features; track feat) {
+                  <span class="tag">{{ feat }}</span>
+                }
+              </div>
+            }
+          </div>
+          <div class="tool-card-arrow">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <polyline points="9 18 15 12 9 6" />
+            </svg>
+          </div>
+        </a>
+      }
+    </div>
+  </section>
+  <section class="privacy-section">
+    <div class="privacy-card">
+      <svg
+        class="privacy-icon"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+      </svg>
+      <div class="privacy-content">
+        <h3>Privacy Promise</h3>
+        <p>
+          Every tool on this site processes data locally in your browser using
+          JavaScript. No API calls, no cookies, no analytics trackers, and no
+          data ever leaves your device. You can verify this yourself — open
+          DevTools Network tab and watch: zero outbound requests.
+        </p>
+      </div>
+    </div>
+  </section>
+</div>

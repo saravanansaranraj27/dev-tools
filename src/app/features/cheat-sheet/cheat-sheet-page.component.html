@@ -1,0 +1,36 @@
+<div class="cs-page fade-in">
+  <div class="cs-header">
+    <div class="cs-tabs">
+      @for (topic of topics; track topic) {
+        <button
+          class="cs-tab"
+          [class.active]="activeTopic() === topic"
+          (click)="setTopic(topic)"
+        >
+          {{ topic | capitalize }}
+        </button>
+      }
+    </div>
+    <app-search-bar (searchChange)="onSearch($event)" />
+  </div>
+
+  <div class="cs-content">
+    @if (filteredData().length === 0) {
+      <div class="cs-empty">
+        No commands match "<strong>{{ searchQuery() }}</strong
+        >"
+      </div>
+    }
+
+    @for (category of filteredData(); track category.category) {
+      <div class="cs-category">
+        <h2 class="cs-category-title">{{ category.category }}</h2>
+        <div class="cs-grid">
+          @for (cmd of category.commands; track cmd.name) {
+            <app-category-card [command]="cmd" />
+          }
+        </div>
+      </div>
+    }
+  </div>
+</div>

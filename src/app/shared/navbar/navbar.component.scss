@@ -1,0 +1,122 @@
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: color-mix(in srgb, var(--bg-primary) 85%, transparent);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border-color);
+  transition:
+    background var(--transition),
+    border-color var(--transition);
+}
+
+.navbar-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.navbar-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 700;
+  font-size: 1.2rem;
+  letter-spacing: -0.02em;
+  text-decoration: none;
+  color: var(--text-primary);
+  transition: color var(--transition);
+}
+
+.brand-icon {
+  width: 26px;
+  height: 26px;
+  color: var(--accent);
+  filter: drop-shadow(0 0 6px var(--accent-glow));
+}
+
+.navbar-links {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: var(--radius);
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  transition: all var(--transition);
+}
+
+.nav-link:hover {
+  color: var(--text-primary);
+  background: var(--bg-tertiary);
+}
+
+.nav-icon {
+  width: 18px;
+  height: 18px;
+  color: var(--icon-color);
+  transition: color var(--transition);
+}
+
+.nav-link.active {
+  color: white;
+  background: var(--accent);
+  box-shadow: 0 0 20px var(--accent-glow);
+}
+
+.nav-link.active .nav-icon {
+  color: #ffffff;
+}
+
+.theme-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  margin-left: 8px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all var(--transition);
+}
+
+.theme-toggle:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+  background: var(--bg-tertiary);
+}
+
+.theme-toggle svg {
+  width: 20px;
+  height: 20px;
+}
+
+@media (max-width: 768px) {
+  .navbar-inner {
+    padding: 0 16px;
+  }
+  .nav-link span {
+    display: none;
+  }
+  .nav-link {
+    padding: 8px 12px;
+  }
+  .navbar-brand .brand-text {
+    display: none;
+  }
+}

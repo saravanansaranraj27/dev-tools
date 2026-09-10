@@ -1,0 +1,320 @@
+.fmt-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1.78rem 1.33rem;
+}
+
+.fmt-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.67rem;
+  margin-bottom: 1.11rem;
+  flex-wrap: wrap;
+}
+
+.fmt-modes {
+  display: flex;
+  gap: 0.22rem;
+  background: var(--bg-secondary);
+  padding: 0.22rem;
+  border-radius: var(--radius);
+}
+
+.fmt-mode-btn {
+  padding: 0.39rem 1rem;
+  border: none;
+  background: transparent;
+  color: var(--text-secondary);
+  border-radius: calc(var(--radius) - 4px);
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-weight: 500;
+  transition: all var(--transition);
+}
+
+.fmt-mode-btn:hover {
+  color: var(--text-primary);
+}
+
+.fmt-mode-btn.active {
+  background: var(--accent);
+  color: white;
+  box-shadow: 0 2px 12px var(--accent-glow);
+}
+
+.fmt-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.44rem;
+}
+
+.fmt-indent-select {
+  padding: 0.39rem 0.67rem;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  color: var(--text-primary);
+  font-size: 0.8rem;
+  outline: none;
+  cursor: pointer;
+}
+
+.fmt-indent-select:focus {
+  border-color: var(--accent);
+}
+
+.fmt-btn {
+  padding: 0.44rem 1.11rem;
+  border: none;
+  border-radius: var(--radius);
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition);
+}
+
+.fmt-btn.primary {
+  background: var(--accent);
+  color: white;
+  box-shadow: 0 2px 16px var(--accent-glow);
+}
+
+.fmt-btn.primary:hover {
+  filter: brightness(1.15);
+  transform: translateY(-1px);
+}
+
+.fmt-btn.secondary {
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
+  border: 1px solid var(--border-color);
+}
+
+.fmt-btn.secondary:hover {
+  color: var(--text-primary);
+  border-color: var(--text-secondary);
+}
+
+.fmt-editors {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.89rem;
+  min-height: 26.67rem;
+}
+
+.fmt-output-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.fmt-panel {
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  overflow: hidden;
+  transition: border-color var(--transition);
+  flex: 1;
+}
+
+.fmt-panel:focus-within {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-glow);
+}
+
+.fmt-panel.panel-error {
+  border-color: var(--error);
+}
+
+.fmt-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.56rem 0.89rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--panel-header-color);
+  background: var(--bg-tertiary);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.fmt-panel-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.fmt-panel-icon {
+  width: 14px;
+  height: 14px;
+  color: var(--icon-color);
+  flex-shrink: 0;
+}
+
+.fmt-panel-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.67rem;
+}
+
+.fmt-copy-btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 5px !important;
+  background: none !important;
+  border: none !important;
+  color: var(--accent) !important;
+  font-size: 0.78rem !important;
+  cursor: pointer !important;
+  padding: 0.22rem 0.56rem !important;
+  border-radius: 4px !important;
+  transition: all var(--transition) !important;
+  line-height: 1 !important;
+}
+
+.fmt-copy-btn:hover {
+  background: var(--accent-glow) !important;
+}
+
+.fmt-copy-btn.copied {
+  color: var(--success) !important;
+}
+
+.fmt-copy-btn svg,
+.fmt-copy-icon {
+  width: 14px !important;
+  height: 14px !important;
+  min-width: 14px !important;
+  min-height: 14px !important;
+  flex-shrink: 0 !important;
+  display: block !important;
+}
+
+.fmt-copy-btn span {
+  display: inline-block !important;
+  line-height: 1 !important;
+}
+
+.fmt-textarea {
+  flex: 1;
+  width: 100%;
+  padding: 0.89rem;
+  background: transparent;
+  border: none;
+  color: var(--text-primary);
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  line-height: 1.7;
+  resize: none;
+  outline: none;
+  tab-size: 2;
+}
+
+.fmt-textarea::placeholder {
+  color: var(--text-secondary);
+  opacity: 0.5;
+}
+
+.fmt-textarea.has-error {
+  color: var(--error);
+}
+
+.fmt-textarea.output {
+  color: var(--success);
+}
+
+.fmt-error-display,
+.fmt-success-display {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.67rem;
+  padding: 1.78rem;
+  text-align: center;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+}
+
+.fmt-error-icon {
+  width: 2.67rem;
+  height: 2.67rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: rgba(248, 113, 113, 0.12);
+  color: var(--error);
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+
+.fmt-error-display p {
+  color: var(--error);
+  font-size: 0.8rem;
+  max-width: 16.67rem;
+  word-break: break-word;
+}
+
+.fmt-success-icon {
+  width: 2.67rem;
+  height: 2.67rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: rgba(74, 222, 128, 0.12);
+  color: var(--success);
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+
+.fmt-success-display p {
+  color: var(--success);
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.fmt-privacy {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 1.11rem;
+  font-size: 0.8rem;
+  color: var(--text-primary);
+  opacity: 0.65;
+}
+
+.fmt-privacy-icon {
+  width: 16px;
+  height: 16px;
+  color: var(--icon-color);
+  flex-shrink: 0;
+}
+
+@media (max-width: 768px) {
+  .fmt-editors {
+    grid-template-columns: 1fr;
+    min-height: auto;
+  }
+
+  .fmt-textarea {
+    min-height: 13.33rem;
+  }
+
+  .fmt-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .fmt-actions {
+    justify-content: flex-end;
+  }
+}

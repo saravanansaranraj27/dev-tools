@@ -1,0 +1,157 @@
+<div class="b64-page fade-in">
+  <div class="b64-toolbar">
+    <div class="b64-modes">
+      <button
+        class="b64-mode-btn"
+        [class.active]="mode() === 'encode'"
+        (click)="setMode('encode')"
+      >
+        Encode
+      </button>
+      <button
+        class="b64-mode-btn"
+        [class.active]="mode() === 'decode'"
+        (click)="setMode('decode')"
+      >
+        Decode
+      </button>
+    </div>
+    <div class="b64-type-badge">
+      Detected: <strong>{{ detectedType() }}</strong>
+    </div>
+    <button class="b64-btn secondary" (click)="clear()">Clear</button>
+  </div>
+
+  <div class="b64-editors">
+    <div class="b64-panel">
+      <div class="b64-panel-header">
+        <span class="b64-panel-label">
+          <svg
+            class="b64-panel-icon"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path
+              d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"
+            />
+            <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
+          </svg>
+          INPUT
+        </span>
+        <span class="b64-char-count">{{ input().length }} chars</span>
+      </div>
+      <textarea
+        class="b64-textarea"
+        [value]="input()"
+        (input)="onInput($any($event.target).value)"
+        [placeholder]="
+          mode() === 'encode'
+            ? 'Enter text to encode...'
+            : 'Enter Base64 to decode...'
+        "
+        spellcheck="false"
+      ></textarea>
+    </div>
+
+    <div class="b64-panel">
+      <div class="b64-panel-header">
+        <span class="b64-panel-label">
+          <svg
+            class="b64-panel-icon"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <polyline points="16 18 22 12 16 6" />
+            <polyline points="8 6 2 12 8 18" />
+          </svg>
+          OUTPUT
+        </span>
+        @if (outputText() && !errorMsg()) {
+          <button
+            class="b64-copy-btn"
+            [class.copied]="isCopied()"
+            (click)="copyOutput()"
+          >
+            @if (isCopied()) {
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+              <span>Copied</span>
+            } @else {
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
+                <path
+                  d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"
+                />
+              </svg>
+              <span>Copy</span>
+            }
+          </button>
+        }
+      </div>
+      @if (errorMsg()) {
+        <div class="b64-error">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <circle cx="12" cy="12" r="10" />
+            <line x1="15" y1="9" x2="9" y2="15" />
+            <line x1="9" y1="9" x2="15" y2="15" />
+          </svg>
+          <p>{{ errorMsg() }}</p>
+        </div>
+      } @else {
+        <textarea
+          class="b64-textarea output"
+          readonly
+          [value]="outputText()"
+          placeholder="Result will appear here..."
+        ></textarea>
+      }
+    </div>
+  </div>
+
+  <div class="b64-info">
+    <div class="b64-info-card">
+      <h3>UTF-8 Safe</h3>
+      <p>
+        This tool handles Unicode correctly using encodeURIComponent/atob
+        combination, unlike naive btoa() which breaks on non-ASCII characters.
+      </p>
+    </div>
+    <div class="b64-info-card">
+      <h3>Privacy First</h3>
+      <p>
+        All encoding/decoding runs entirely in your browser. No data is
+        transmitted to any server.
+      </p>
+    </div>
+  </div>
+</div>
