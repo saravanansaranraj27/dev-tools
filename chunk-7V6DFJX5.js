@@ -1,0 +1,1 @@
+import{Ja as e}from"./chunk-ELLL54BA.js";var i=class t{transform(r){return r?r.charAt(0).toUpperCase()+r.slice(1):""}static \u0275fac=function(p){return new(p||t)};static \u0275pipe=e({name:"capitalize",type:t,pure:!0})};export{i as a};
