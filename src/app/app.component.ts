@@ -57,7 +57,7 @@ export class AppComponent implements OnInit, OnDestroy {
         ) {
           const currentNavigation = this.navigationId;
           const elapsed = performance.now() - this.loadingStartedAt;
-          const minimumDuration = 450;
+          const minimumDuration = 800;
           const remaining = Math.max(0, minimumDuration - elapsed);
           setTimeout(() => {
             if (currentNavigation === this.navigationId) {
