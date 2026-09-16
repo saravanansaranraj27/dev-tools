@@ -58,18 +58,22 @@
   font-size: 0.95rem;
   font-weight: 500;
   color: var(--text-secondary);
-  transition: all var(--transition);
+  transition:
+    background var(--transition),
+    color var(--transition),
+    box-shadow var(--transition),
+    transform var(--transition);
+}
+
+.nav-link:hover,
+.nav-link.active {
+  color: #ffffff;
+  background: var(--accent);
+  box-shadow: 0 0 20px var(--accent-glow);
 }
 
 .nav-link:hover {
-  color: var(--text-primary);
-  background: var(--bg-tertiary);
-}
-
-.nav-link.active {
-  color: white;
-  background: var(--accent);
-  box-shadow: 0 0 20px var(--accent-glow);
+  transform: translateY(-1px);
 }
 
 .theme-toggle,
@@ -79,25 +83,41 @@
   justify-content: center;
   width: 40px;
   height: 40px;
-  border: 1px solid var(--border-color);
+  padding: 0;
+  border: 1px solid var(--accent);
   border-radius: var(--radius);
-  background: var(--bg-secondary);
-  color: var(--text-secondary);
+  background: var(--accent);
+  color: #ffffff;
   cursor: pointer;
-  transition: all var(--transition);
+  transition:
+    background var(--transition),
+    border-color var(--transition),
+    transform var(--transition);
 }
 
 .theme-toggle:hover,
 .mobile-menu-toggle:hover {
-  color: var(--accent);
+  background: var(--accent);
   border-color: var(--accent);
-  background: var(--bg-tertiary);
+  transform: translateY(-1px);
 }
 
 .theme-toggle svg,
 .mobile-menu-toggle svg {
   width: 20px;
   height: 20px;
+  color: currentColor;
+  stroke: currentColor;
+}
+
+:host-context([data-theme="dark"]) .theme-toggle,
+:host-context([data-theme="dark"]) .mobile-menu-toggle {
+  color: #000000;
+}
+
+:host-context([data-theme="light"]) .theme-toggle,
+:host-context([data-theme="light"]) .mobile-menu-toggle {
+  color: #ffffff;
 }
 
 .mobile-menu-toggle {
@@ -109,7 +129,7 @@
   top: 100%;
   left: 0;
   right: 0;
-  background: var(--bg-elevated);
+  background: var(--bg-primary);
   border-bottom: 1px solid var(--border-color);
   padding: 16px;
   display: flex;
@@ -118,9 +138,11 @@
   transform: translateY(-100%);
   opacity: 0;
   visibility: hidden;
-  transition: all 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    opacity 0.3s ease,
+    visibility 0.3s ease;
   z-index: 99;
-  background: var(--bg-primary);
 }
 
 .mobile-drawer.open {
@@ -136,18 +158,20 @@
   color: var(--text-secondary);
   text-decoration: none;
   border-radius: var(--radius);
-  transition: all 0.2s ease;
+  transition:
+    background var(--transition),
+    color var(--transition);
 }
 
 .mobile-nav-link:hover,
 .mobile-nav-link.active {
-  background: var(--accent-glow);
-  color: var(--accent);
+  background: var(--accent);
+  color: #ffffff;
 }
 
 @media (max-width: 768px) {
   .navbar-inner {
-    padding: 0 16px;
+    padding: 0 12px;
   }
 
   .desktop-nav {
@@ -159,6 +183,12 @@
   }
 
   .navbar-brand .brand-text {
-    display: none;
+    display: block;
+    font-size: 1rem;
+  }
+
+  .brand-icon {
+    width: 22px;
+    height: 22px;
   }
 }

@@ -17,6 +17,13 @@
   background: var(--bg-secondary);
   padding: 4px;
   border-radius: var(--radius);
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  max-width: 100%;
+}
+.cs-tabs::-webkit-scrollbar {
+  display: none;
 }
 .cs-tab {
   padding: 8px 20px;
@@ -28,9 +35,12 @@
   font-size: 0.875rem;
   font-weight: 500;
   transition: all var(--transition);
+  flex-shrink: 0;
+  white-space: nowrap;
 }
 .cs-tab:hover {
   color: var(--text-primary);
+  background: var(--bg-tertiary);
 }
 .cs-tab.active {
   background: var(--accent);
@@ -64,5 +74,29 @@
   .cs-header {
     flex-direction: column;
     align-items: stretch;
+  }
+  .cs-tabs {
+    -webkit-mask-image: linear-gradient(
+      to right,
+      transparent,
+      black 12px,
+      black calc(100% - 12px),
+      transparent
+    );
+    mask-image: linear-gradient(
+      to right,
+      transparent,
+      black 12px,
+      black calc(100% - 12px),
+      transparent
+    );
+  }
+}
+@media (max-width: 480px) {
+  .cs-grid {
+    grid-template-columns: 1fr;
+  }
+  .cs-page {
+    padding: 24px 16px;
   }
 }

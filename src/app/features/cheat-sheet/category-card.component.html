@@ -1,0 +1,10 @@
+<div class="cs-card">
+  <div class="cs-card-header">
+    <h3 class="cs-card-name">{{ command().name }}</h3>
+    <p class="cs-card-desc">{{ command().desc }}</p>
+  </div>
+  <div class="cs-cmd-block">
+    <code>{{ command().cmd }}</code>
+    <app-copy-button [text]="command().cmd" />
+  </div>
+</div>

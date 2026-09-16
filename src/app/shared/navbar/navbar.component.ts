@@ -1,10 +1,5 @@
 import { Component, inject, OnInit, OnDestroy } from '@angular/core';
-import {
-  RouterLink,
-  RouterLinkActive,
-  Router,
-  NavigationEnd,
-} from '@angular/router';
+import { RouterLink, Router, NavigationEnd } from '@angular/router';
 import { ThemeService } from '../theme.service';
 import { filter } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
@@ -12,7 +7,7 @@ import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [RouterLink, RouterLinkActive],
+  imports: [RouterLink],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss',
 })

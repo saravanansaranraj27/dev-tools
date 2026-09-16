@@ -1,0 +1,29 @@
+<div class="fmt-toolbar">
+  <div class="fmt-modes">
+    @for (m of modes; track m) {
+      <button
+        class="fmt-mode-btn"
+        [class.active]="mode() === m"
+        (click)="modeChange.emit(m)"
+      >
+        {{ m | capitalize }}
+      </button>
+    }
+  </div>
+  <div class="fmt-actions">
+    @if (mode() === "prettify") {
+      <select
+        class="fmt-indent-select"
+        [ngModel]="indent()"
+        (ngModelChange)="indentChange.emit($event)"
+      >
+        <option [ngValue]="2">2 spaces</option>
+        <option [ngValue]="4">4 spaces</option>
+      </select>
+    }
+    <button class="fmt-btn secondary" (click)="clear.emit()">Clear</button>
+    <button class="fmt-btn primary" (click)="format.emit()">
+      {{ mode() === "validate" ? "✓ Validate" : "▶ Format" }}
+    </button>
+  </div>
+</div>

@@ -1,80 +1,38 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import {
-  RouterOutlet,
-  Router,
-  NavigationStart,
-  NavigationEnd,
   NavigationCancel,
+  NavigationEnd,
   NavigationError,
+  NavigationStart,
+  Router,
+  RouterOutlet,
 } from '@angular/router';
 import { NavbarComponent } from './shared/navbar/navbar.component';
-import { filter } from 'rxjs/operators';
-import { Subscription } from 'rxjs';
+import { filter, Subscription } from 'rxjs';
+
+type SkeletonType = 'home' | 'cheatsheet' | 'formatter' | 'base64';
 
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [RouterOutlet, NavbarComponent],
-  template: `
-    @if (isLoading) {
-      <div class="page-loader">
-        <div class="loader-spinner"></div>
-      </div>
-    }
-    <div
-      class="app-shell"
-      [style.visibility]="isLoading ? 'hidden' : 'visible'"
-    >
-      <app-navbar />
-      <main class="app-main">
-        <router-outlet />
-      </main>
-
-      @if (showBackToTop) {
-        <button
-          class="back-to-top"
-          (click)="scrollToTop()"
-          aria-label="Back to top"
-        >
-          <svg
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M5 15l7-7 7 7"
-            />
-          </svg>
-        </button>
-      }
-    </div>
-  `,
-  styles: [
-    `
-      .app-shell {
-        min-height: 100vh;
-        display: flex;
-        flex-direction: column;
-      }
-      .app-main {
-        flex: 1;
-      }
-    `,
-  ],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.scss',
 })
 export class AppComponent implements OnInit, OnDestroy {
   isLoading = true;
   showBackToTop = false;
-  private routerSub?: Subscription;
-  private scrollListener?: () => void;
+  skeletonType: SkeletonType = 'home';
+  private routerSubscription?: Subscription;
+  private scrollHandler?: () => void;
+  private loadingStartedAt = performance.now();
+  private navigationId = 0;
 
   constructor(private router: Router) {}
 
   ngOnInit(): void {
-    this.routerSub = this.router.events
+    this.setSkeletonFromUrl(this.router.url);
+    this.routerSubscription = this.router.events
       .pipe(
         filter(
           (event) =>
@@ -86,28 +44,62 @@ export class AppComponent implements OnInit, OnDestroy {
       )
       .subscribe((event) => {
         if (event instanceof NavigationStart) {
+          this.navigationId++;
+          this.loadingStartedAt = performance.now();
+          this.setSkeletonFromUrl(event.url);
           this.isLoading = true;
-        } else {
+          return;
+        }
+        if (
+          event instanceof NavigationEnd ||
+          event instanceof NavigationCancel ||
+          event instanceof NavigationError
+        ) {
+          const currentNavigation = this.navigationId;
+          const elapsed = performance.now() - this.loadingStartedAt;
+          const minimumDuration = 450;
+          const remaining = Math.max(0, minimumDuration - elapsed);
           setTimeout(() => {
-            this.isLoading = false;
-          }, 300);
+            if (currentNavigation === this.navigationId) {
+              requestAnimationFrame(() => {
+                this.isLoading = false;
+              });
+            }
+          }, remaining);
         }
       });
 
-    this.scrollListener = () => {
-      this.showBackToTop = window.scrollY > 400;
+    this.scrollHandler = () => {
+      const threshold = window.innerWidth <= 768 ? 150 : 400;
+      this.showBackToTop = window.scrollY > threshold;
     };
-    window.addEventListener('scroll', this.scrollListener);
-  }
-
-  scrollToTop(): void {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.addEventListener('scroll', this.scrollHandler, { passive: true });
   }
 
   ngOnDestroy(): void {
-    this.routerSub?.unsubscribe();
-    if (this.scrollListener) {
-      window.removeEventListener('scroll', this.scrollListener);
+    this.routerSubscription?.unsubscribe();
+    if (this.scrollHandler) {
+      window.removeEventListener('scroll', this.scrollHandler);
+    }
+  }
+
+  scrollToTop(): void {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
+  }
+
+  private setSkeletonFromUrl(url: string): void {
+    const path = url.split('?')[0].split('#')[0];
+    if (path.startsWith('/cheatsheet')) {
+      this.skeletonType = 'cheatsheet';
+    } else if (path.startsWith('/formatter')) {
+      this.skeletonType = 'formatter';
+    } else if (path.startsWith('/base64')) {
+      this.skeletonType = 'base64';
+    } else {
+      this.skeletonType = 'home';
     }
   }
 }

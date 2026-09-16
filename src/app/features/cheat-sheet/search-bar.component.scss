@@ -1,0 +1,80 @@
+.cs-search-wrapper {
+  position: relative;
+  flex: 0 1 320px;
+  display: flex;
+  align-items: center;
+}
+
+.cs-search-icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 16px;
+  height: 16px;
+  color: var(--icon-color);
+  pointer-events: none;
+  transition: color var(--transition);
+}
+
+.cs-search-input {
+  width: 100%;
+  padding: 10px 72px 10px 38px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  color: var(--text-primary);
+  font-size: 0.9rem;
+  outline: none;
+  transition: all var(--transition);
+}
+
+.cs-search-input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-glow);
+}
+
+.cs-search-input::placeholder {
+  color: var(--text-secondary);
+  opacity: 0.6;
+}
+
+.cs-shortcut-badge {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  gap: 3px;
+  pointer-events: none;
+}
+
+.cs-shortcut-badge kbd {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 22px;
+  height: 22px;
+  padding: 0 5px;
+  font-family: var(--font-sans);
+  font-size: 0.65rem;
+  font-weight: 600;
+  line-height: 1;
+  color: var(--text-secondary);
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  transition: all var(--transition);
+}
+
+@media (max-width: 768px) {
+  .cs-search-wrapper {
+    flex: 1 1 auto;
+  }
+  .cs-shortcut-badge {
+    display: none;
+  }
+  .cs-search-input {
+    padding-right: 14px;
+  }
+}

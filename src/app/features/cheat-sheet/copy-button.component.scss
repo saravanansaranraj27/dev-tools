@@ -1,0 +1,26 @@
+.cs-copy-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 4px;
+  transition: all var(--transition);
+  color: var(--icon-color);
+  opacity: 0.6;
+}
+.cs-copy-btn:hover {
+  opacity: 1;
+  color: var(--accent);
+  background: var(--accent-glow);
+}
+.cs-copy-btn.copied {
+  opacity: 1;
+  color: var(--success);
+}
+.cs-copy-btn svg {
+  width: 16px;
+  height: 16px;
+}

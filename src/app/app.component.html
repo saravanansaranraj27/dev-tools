@@ -1,0 +1,119 @@
+@if (isLoading) {
+  <div class="page-loader">
+    <div class="skeleton-shell">
+      @if (skeletonType === "home") {
+        <section class="skeleton-home">
+          <div class="skeleton-bar skeleton-eyebrow"></div>
+          <div class="skeleton-bar skeleton-title"></div>
+          <div class="skeleton-bar skeleton-subtitle"></div>
+          <div class="skeleton-grid">
+            <div class="skeleton-card"></div>
+            <div class="skeleton-card"></div>
+            <div class="skeleton-card"></div>
+          </div>
+          <div class="skeleton-large"></div>
+        </section>
+      }
+      @if (skeletonType === "cheatsheet") {
+        <section class="skeleton-cheatsheet">
+          <div class="skeleton-bar skeleton-title"></div>
+          <div class="skeleton-bar skeleton-subtitle"></div>
+          <div class="skeleton-cheatsheet-layout">
+            <div class="skeleton-sidebar">
+              <div class="skeleton-small-bar"></div>
+              <div class="skeleton-small-bar"></div>
+              <div class="skeleton-small-bar"></div>
+              <div class="skeleton-small-bar"></div>
+              <div class="skeleton-small-bar"></div>
+            </div>
+            <div class="skeleton-command-area">
+              <div class="skeleton-command-card"></div>
+              <div class="skeleton-command-card"></div>
+              <div class="skeleton-command-card"></div>
+              <div class="skeleton-command-card"></div>
+            </div>
+          </div>
+        </section>
+      }
+      @if (skeletonType === "formatter") {
+        <section class="skeleton-formatter">
+          <div class="skeleton-bar skeleton-title"></div>
+          <div class="skeleton-bar skeleton-subtitle"></div>
+          <div class="skeleton-editor-layout">
+            <div class="skeleton-editor">
+              <div class="skeleton-toolbar"></div>
+              <div class="skeleton-code">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+              </div>
+            </div>
+            <div class="skeleton-editor">
+              <div class="skeleton-toolbar"></div>
+              <div class="skeleton-code">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+              </div>
+            </div>
+          </div>
+        </section>
+      }
+      @if (skeletonType === "base64") {
+        <section class="skeleton-base64">
+          <div class="skeleton-bar skeleton-title"></div>
+          <div class="skeleton-bar skeleton-subtitle"></div>
+          <div class="skeleton-base64-layout">
+            <div class="skeleton-panel">
+              <div class="skeleton-panel-header"></div>
+              <div class="skeleton-textarea"></div>
+              <div class="skeleton-button"></div>
+            </div>
+            <div class="skeleton-panel">
+              <div class="skeleton-panel-header"></div>
+              <div class="skeleton-textarea"></div>
+              <div class="skeleton-button"></div>
+            </div>
+          </div>
+        </section>
+      }
+    </div>
+  </div>
+}
+
+<div class="app-shell">
+  <app-navbar />
+  <main class="app-main">
+    <router-outlet />
+  </main>
+  @if (showBackToTop) {
+    <button
+      class="back-to-top"
+      type="button"
+      (click)="scrollToTop()"
+      aria-label="Back to top"
+    >
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2.2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true"
+      >
+        <path d="M5 15l7-7 7 7"></path>
+      </svg>
+    </button>
+  }
+</div>

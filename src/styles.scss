@@ -12,6 +12,7 @@
   --error: #f87171;
   --icon-color: #c8cce0;
   --panel-header-color: #9ca0b0;
+  --shadow-color: rgba(0, 0, 0, 0.45);
   --radius: 10px;
   --transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   --font-mono: "JetBrains Mono", "Fira Code", monospace;
@@ -32,6 +33,7 @@
   --error: #dc2626;
   --icon-color: #1a1d2e;
   --panel-header-color: #2d3148;
+  --shadow-color: rgba(15, 17, 23, 0.15);
 }
 
 *,
@@ -95,17 +97,6 @@ body {
   }
 }
 
-.page-loader {
-  position: fixed;
-  inset: 0;
-  background: var(--bg-primary);
-  z-index: 9999;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: opacity 0.3s ease;
-}
-
 .loader-spinner {
   width: 40px;
   height: 40px;
@@ -128,24 +119,28 @@ body {
   width: 48px;
   height: 48px;
   border-radius: 50%;
-  background: var(--bg-elevated, #161922);
+  background: var(--bg-secondary);
   border: 1px solid var(--border-color);
   color: var(--accent);
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  box-shadow: 0 8px 24px -8px rgba(0, 0, 0, 0.45);
-  transition: all 0.3s ease;
+  box-shadow: 0 8px 24px -8px var(--shadow-color);
+  transition:
+    background var(--transition),
+    color var(--transition),
+    border-color var(--transition),
+    transform var(--transition);
   z-index: 50;
-  animation: fadeIn 0.4s ease;
+  animation: backToTopFadeIn 0.4s ease;
 }
 
 .back-to-top:hover {
   background: var(--accent);
   color: white;
+  border-color: var(--accent);
   transform: translateY(-4px);
-  box-shadow: 0 12px 24px -8px var(--accent-glow);
 }
 
 .back-to-top svg {
@@ -153,7 +148,7 @@ body {
   height: 20px;
 }
 
-@keyframes fadeIn {
+@keyframes backToTopFadeIn {
   from {
     opacity: 0;
     transform: translateY(16px);
@@ -161,5 +156,14 @@ body {
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@media (max-width: 768px) {
+  .back-to-top {
+    bottom: 20px;
+    right: 20px;
+    width: 44px;
+    height: 44px;
   }
 }
