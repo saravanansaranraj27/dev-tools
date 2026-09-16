@@ -23,6 +23,7 @@ export class AppComponent implements OnInit, OnDestroy {
   isLoading = true;
   showBackToTop = false;
   skeletonType: SkeletonType = 'home';
+
   private routerSubscription?: Subscription;
   private scrollHandler?: () => void;
   private loadingStartedAt = performance.now();
@@ -32,6 +33,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.setSkeletonFromUrl(this.router.url);
+
     this.routerSubscription = this.router.events
       .pipe(
         filter(
@@ -50,6 +52,7 @@ export class AppComponent implements OnInit, OnDestroy {
           this.isLoading = true;
           return;
         }
+
         if (
           event instanceof NavigationEnd ||
           event instanceof NavigationCancel ||
@@ -59,6 +62,7 @@ export class AppComponent implements OnInit, OnDestroy {
           const elapsed = performance.now() - this.loadingStartedAt;
           const minimumDuration = 800;
           const remaining = Math.max(0, minimumDuration - elapsed);
+
           setTimeout(() => {
             if (currentNavigation === this.navigationId) {
               requestAnimationFrame(() => {
@@ -73,11 +77,17 @@ export class AppComponent implements OnInit, OnDestroy {
       const threshold = window.innerWidth <= 768 ? 150 : 400;
       this.showBackToTop = window.scrollY > threshold;
     };
+
     window.addEventListener('scroll', this.scrollHandler, { passive: true });
+
+    setTimeout(() => {
+      window.dispatchEvent(new Event('app-ready'));
+    });
   }
 
   ngOnDestroy(): void {
     this.routerSubscription?.unsubscribe();
+
     if (this.scrollHandler) {
       window.removeEventListener('scroll', this.scrollHandler);
     }
@@ -92,6 +102,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
   private setSkeletonFromUrl(url: string): void {
     const path = url.split('?')[0].split('#')[0];
+
     if (path.startsWith('/cheatsheet')) {
       this.skeletonType = 'cheatsheet';
     } else if (path.startsWith('/formatter')) {

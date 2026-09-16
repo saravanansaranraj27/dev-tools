@@ -167,3 +167,65 @@ body {
     height: 44px;
   }
 }
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+  background: var(--bg-primary, #0f1117);
+}
+
+#initial-loader {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #0f1117;
+}
+
+.initial-loader-content {
+  width: min(420px, 80%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.initial-loader-logo {
+  width: 52px;
+  height: 52px;
+  border-radius: 12px;
+  background: linear-gradient(90deg, #1e2130 25%, #2a2d3e 50%, #1e2130 75%);
+  background-size: 200% 100%;
+  animation: initial-loader-shimmer 1.5s infinite;
+}
+
+.initial-loader-title {
+  width: 180px;
+  height: 22px;
+  border-radius: 6px;
+  background: linear-gradient(90deg, #1e2130 25%, #2a2d3e 50%, #1e2130 75%);
+  background-size: 200% 100%;
+  animation: initial-loader-shimmer 1.5s infinite;
+}
+
+.initial-loader-line {
+  width: 260px;
+  height: 12px;
+  border-radius: 6px;
+  background: linear-gradient(90deg, #1e2130 25%, #2a2d3e 50%, #1e2130 75%);
+  background-size: 200% 100%;
+  animation: initial-loader-shimmer 1.5s infinite;
+}
+
+@keyframes initial-loader-shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+
+  100% {
+    background-position: 200% 0;
+  }
+}

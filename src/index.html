@@ -7,7 +7,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
   </head>
+
   <body>
+    <div id="initial-loader">
+      <div class="initial-loader-content">
+        <div class="initial-loader-logo"></div>
+        <div class="initial-loader-title"></div>
+        <div class="initial-loader-line"></div>
+      </div>
+    </div>
+
     <app-root></app-root>
+
+    <script>
+      window.addEventListener("app-ready", function () {
+        const loader = document.getElementById("initial-loader");
+
+        if (loader) {
+          loader.remove();
+        }
+      });
+    </script>
   </body>
 </html>
