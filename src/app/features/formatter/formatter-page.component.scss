@@ -162,41 +162,41 @@
 }
 
 .fmt-copy-btn {
-  display: inline-flex !important;
-  align-items: center !important;
-  gap: 5px !important;
-  background: none !important;
-  border: none !important;
-  color: var(--accent) !important;
-  font-size: 0.78rem !important;
-  cursor: pointer !important;
-  padding: 0.22rem 0.56rem !important;
-  border-radius: 4px !important;
-  transition: all var(--transition) !important;
-  line-height: 1 !important;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: none;
+  border: none;
+  color: var(--accent);
+  font-size: 0.78rem;
+  cursor: pointer;
+  padding: 0.22rem 0.56rem;
+  border-radius: 4px;
+  transition: all var(--transition);
+  line-height: 1;
 }
 
 .fmt-copy-btn:hover {
-  background: var(--accent-glow) !important;
+  background: var(--accent-glow);
 }
 
 .fmt-copy-btn.copied {
-  color: var(--success) !important;
+  color: var(--success);
 }
 
 .fmt-copy-btn svg,
 .fmt-copy-icon {
-  width: 14px !important;
-  height: 14px !important;
-  min-width: 14px !important;
-  min-height: 14px !important;
-  flex-shrink: 0 !important;
-  display: block !important;
+  width: 14px;
+  height: 14px;
+  min-width: 14px;
+  min-height: 14px;
+  flex-shrink: 0;
+  display: block;
 }
 
 .fmt-copy-btn span {
-  display: inline-block !important;
-  line-height: 1 !important;
+  display: inline-block;
+  line-height: 1;
 }
 
 .fmt-textarea {
